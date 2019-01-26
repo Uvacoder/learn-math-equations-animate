@@ -4,7 +4,7 @@ Mathematical Animations App with React Hooks and Ant-Design
 ## Overview
 
 <p align='center'>
-<img src='https://github.com/ValleyZw/forest/blob/master/static/snapshot.jpeg' width='600' alt='App Overview'>
+<img src='https://github.com/ValleyZw/forest/blob/master/static/snapshot.jpeg' width='800' alt='App Overview'>
 </p>
 
 ## Project structure
@@ -22,7 +22,6 @@ forest
        ├── data/               Public data folder
        ├── page/               React routes folder
        ├── utils/              Helper functions folder
-       ├── bootstrap.js        Material-UI stytle initialization
        ├── index.css           Global style
        ├── index.js            Main js file
        └── serviceWorker.js    Service worker configuration
