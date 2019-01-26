@@ -1,6 +1,12 @@
 # forest
 Mathematical Animations App with React Hooks and Ant-Design
 
+## Overview
+
+<p align='center'>
+<img src='https://github.com/ValleyZw/forest/blob/master/static/snapshot.jpeg' width='600' alt='App Overview'>
+</p>
+
 ## Project structure
 
 ```bash
