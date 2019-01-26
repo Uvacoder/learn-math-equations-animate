@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useState } from 'react'
 import { Row, Col } from 'antd'
 import math from 'mathjs'
 
-import { FormulaSaw, FormulaSquare } from './containers'
+import { FormulaSaw, FormulaSquare, FormulaRELU } from './containers'
 import { useIndex, moduleLayout, formulaLayout, useTitle } from 'utils'
 import { Paper, Expand, MultiExpand, Loading } from 'components'
 
@@ -136,7 +136,7 @@ function Home () {
         )}
         <Col span={8} {...formulaLayout}>
           <Paper style={{overflow: 'auto', padding: '4px'}}>
-
+            <FormulaRELU/>
           </Paper>
         </Col>
       </Row>
