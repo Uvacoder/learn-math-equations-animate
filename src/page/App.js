@@ -39,6 +39,10 @@ const routes = [
     component: lazy(() => import('./002_fourier_series'))
   },
   {
+    path: '/linear-regression',
+    component: lazy(() => import('./003_linear_regression'))
+  },
+  {
     path: '(.*)',
     component: lazy(() => import('./error'))
   },

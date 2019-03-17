@@ -42,6 +42,10 @@ const menus = [
   {
     title: '002-fourier-series',
     route: '/fourier-series'
+  },
+  {
+    title: '003-linear-regression',
+    route: '/linear-regression'
   }
 ]
 
