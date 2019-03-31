@@ -2,8 +2,10 @@ import React, { lazy, Suspense, useState } from 'react'
 import { Row, Col } from 'antd'
 import math from 'mathjs'
 
-import { moduleLayout, useTitle } from 'utils'
+import { moduleLayout, useTitle, formulaLayout } from 'utils'
 import { Paper, Expand, Loading } from 'components'
+
+import { FormulaLinearRegression } from './containers'
 
 const Charts = [lazy(() => import('./containers/ChartSeries')), lazy(() => import('./containers/ChartLoss'))]
 
@@ -110,6 +112,12 @@ function Linear () {
             </Paper>
           </Col>
         )}
+
+        <Col span={8} {...formulaLayout}>
+          <Paper style={{overflow: 'auto', padding: '4px'}}>
+            <FormulaLinearRegression/>
+          </Paper>
+        </Col>
       </Row>
     </>
   )

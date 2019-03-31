@@ -1,5 +1,14 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import { ResponsiveContainer, ComposedChart, Scatter, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
+
+/**
+ * ChartSeries
+ * @type {{series: any}}
+ */
+ChartSeries.propTypes = {
+  series: PropTypes.array.isRequired
+}
 
 function ChartSeries ({series}) {
   return <ResponsiveContainer>
