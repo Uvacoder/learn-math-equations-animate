@@ -6,21 +6,18 @@ import { moduleLayout, useTitle, formulaLayout } from 'utils'
 import { Paper, Expand, Loading } from 'components'
 
 import { FormulaLinearRegression } from './containers'
-
 const Charts = [lazy(() => import('./containers/ChartSeries')), lazy(() => import('./containers/ChartLoss'))]
 
 const length = 50
-
 const theta = [math.random(5), math.random(5)]
 const x = math.multiply(math.random([length]), 10)
 const y = math.add(math.multiply(2, x), -5, math.random([length]))
 const x_fit =  math.range(0, 10, 10/1000)
-const X = math.matrix([math.ones(length), x])
 const value = x.map((element,index)=>({x: element, y: y[index]}))
 
 class LinearRegression {
   constructor(x,y, theta, iterations, learning_rate) {
-    this._x = x
+    this._x = math.matrix([math.ones(x.length), x])
     this._y = y
     this._theta = theta
     this._iterations = iterations;
@@ -66,7 +63,6 @@ class LinearRegression {
     this.thetas = thetas;
     this.losses = losses;
   }
-
 }
 
 function Linear () {
@@ -74,7 +70,7 @@ function Linear () {
   const [sliderLinear, setSliderLinear] = useState(1)
   const onSliderLinearChange = value => setSliderLinear(value)
 
-  const linear_regression = new LinearRegression(X, y, theta, sliderLinear, 0.01)
+  const linear_regression = new LinearRegression(x, y, theta, sliderLinear, 0.01)
   linear_regression.fit()
   const {losses, new_theta} = linear_regression
 
