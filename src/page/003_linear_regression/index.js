@@ -9,10 +9,11 @@ import { FormulaLinearRegression } from './containers'
 const Charts = [lazy(() => import('./containers/ChartSeries')), lazy(() => import('./containers/ChartLoss'))]
 
 const length = 50
-const theta = [math.random(5), math.random(5)]
+const theta = math.random([2], 5)
+
 const x = math.multiply(math.random([length]), 10)
 const y = math.add(math.multiply(2, x), -5, math.random([length]))
-const x_fit =  math.range(0, 10, 10/1000)
+const x_fit = [0, 10]
 const value = x.map((element,index)=>({x: element, y: y[index]}))
 
 class LinearRegression {
@@ -22,6 +23,7 @@ class LinearRegression {
     this._theta = theta
     this._iterations = iterations;
     this._learning_rate = learning_rate;
+    this.output = math.zeros(math.size(y))
   }
 
   set thetas(thetas){
@@ -44,9 +46,18 @@ class LinearRegression {
     return this.thetas.pop()
   }
 
-  loss(theta) {
-    const error = math.add(math.multiply(math.transpose(this._x), theta), math.multiply(-1, this._y))
-    return 0.5* math.multiply(math.transpose(error), error)
+  loss() {
+    const diff = math.subtract(this.output, this._y)
+    return math.multiply(0.5/this._y.length, math.multiply(math.transpose(diff), diff))
+  }
+
+  feedforward() {
+    this.output = math.multiply(math.transpose(this._theta), this._x)
+  }
+
+  backprop(){
+    const delta_weights = math.multiply(1/this._y.length, math.multiply(this._x, math.subtract(this.output, this._y)))
+    this._theta = math.subtract(this._theta, math.multiply(this._learning_rate, delta_weights))
   }
 
   fit() {
@@ -54,12 +65,11 @@ class LinearRegression {
     const thetas = []
     thetas.push(this._theta)
     for (let i=0; i <this._iterations; i++){
-      losses.push({name: i, data: this.loss(thetas[i])})
-      const error = math.add(math.multiply(math.transpose(this._x), thetas[i]), math.multiply(-1, this._y))
-      const theta_delta = math.multiply(this._x, error, this._learning_rate/this._y.length, -1)
-      thetas.push(math.add(thetas[i], theta_delta).toArray())
+      losses.push({name: i, data: this.loss()})
+      this.feedforward()
+      this.backprop()
+      thetas.push(this._theta.toArray())
     }
-
     this.thetas = thetas;
     this.losses = losses;
   }
@@ -74,8 +84,8 @@ function Linear () {
   linear_regression.fit()
   const {losses, new_theta} = linear_regression
 
-  const y_fit = math.add(new_theta[0], math.multiply(new_theta[1], x_fit)).toArray()
-  const fits = x_fit.toArray().map((element, index)=> ({x: element, y: y_fit[index]}))
+  const y_fit = math.add(new_theta[0], math.multiply(new_theta[1], x_fit))
+  const fits = x_fit.map((element, index)=> ({x: element, y: y_fit[index]}))
 
   const series = [
     {
