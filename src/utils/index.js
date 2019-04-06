@@ -116,3 +116,11 @@ export const fourier_coefficient = (a0, an, bn, n) => {
   })
   return freq
 }
+
+export const generate_random_data_sample = (sample_size, feature_dim=2, num_classes=2) => {
+  const y = math.randomInt([sample_size,1], 0, num_classes)
+  const x = math.dotMultiply(math.add(math.random([sample_size, feature_dim], -2, 2), 5), math.add(math.concat(y, y), 1))
+
+
+  return {x, y}
+}

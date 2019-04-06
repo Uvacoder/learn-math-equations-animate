@@ -46,6 +46,10 @@ const menus = [
   {
     title: '003-linear-regression',
     route: '/linear-regression'
+  },
+  {
+    title: '004-logistic-regression',
+    route: '/logistic-regression'
   }
 ]
 
