@@ -57,7 +57,7 @@ class LogisticRegression {
 
   loss() {
     const fir = math.multiply(math.transpose(this._y), this.output)
-    const sec = math.multiply(math.transpose(math.add(1, math.multiply(-1, this._y))), math.log(math.add(1.0000000001, math.multiply(-1, this.output))))
+    const sec = math.multiply(math.transpose(math.subtract(1, this._y)), math.log(math.subtract(1.0000000001, this.output)))
     return math.multiply(-1/this._y.length, math.add(fir, sec))[0][0]
   }
 
